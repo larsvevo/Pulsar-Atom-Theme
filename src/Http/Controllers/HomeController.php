@@ -26,14 +26,14 @@ class HomeController extends Controller
         $articles = WebsiteArticle::with('user')
             ->where('is_published', true)
             ->latest('id')
-            ->get();
-
-        $articles = WebsiteArticle::with('user')
-            ->where('is_published', true)
-            ->latest('id')
             ->take(3)
             ->get();
 
+
+        $article = WebsiteArticle::with('user')
+            ->where('is_published', true)
+            ->latest('id')
+            ->first();
 
         $photos = CameraWeb::whereIn('user_id', $request->user()->friends->pluck('user_two_id'))
             ->latest('id')
