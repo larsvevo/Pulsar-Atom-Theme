@@ -23,7 +23,7 @@ class HomeController extends Controller
             ->whereRelation('friend', 'online', '1')
             ->get();
 
-        $articles = WebsiteArticle::with('user')
+        $article = WebsiteArticle::with('user')
             ->where('is_published', true)
             ->latest('id')
             ->limit(3)
