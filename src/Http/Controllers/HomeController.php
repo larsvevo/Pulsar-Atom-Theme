@@ -29,6 +29,12 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
+        $articles = WebsiteArticle::with('user')
+            ->where('is_published', true)
+            ->latest('id')
+            ->limit(3)
+            ->get();       
+
         $photos = CameraWeb::whereIn('user_id', $request->user()->friends->pluck('user_two_id'))
             ->latest('id')
             ->limit(4)
