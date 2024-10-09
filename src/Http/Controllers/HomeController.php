@@ -33,7 +33,8 @@ class HomeController extends Controller
         $article = WebsiteArticle::with('user')
             ->where('is_published', true)
             ->latest('id')
-            ->first();
+            ->take(3)
+            ->get();
 
         $photos = CameraWeb::whereIn('user_id', $request->user()->friends->pluck('user_two_id'))
             ->latest('id')
